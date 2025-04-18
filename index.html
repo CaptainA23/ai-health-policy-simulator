@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Health Policy Simulator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .card { margin-top: 20px; }
+    .chart-container { height: 400px; }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="text-center mb-4">AI-Powered Health Policy Simulator</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="region" class="form-label">Select Region</label>
+          <select class="form-select" id="region">
+            <option value="Mwanza">Mwanza</option>
+            <option value="Dodoma">Dodoma</option>
+            <option value="Arusha">Arusha</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="policy" class="form-label">Choose Policy Scenario</label>
+          <select class="form-select" id="policy">
+            <option value="nurse_deployment">Deploy 100 Nurses</option>
+            <option value="vaccine_expansion">Expand Immunization</option>
+            <option value="mobile_clinics">Introduce Mobile Clinics</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="simulatePolicy()">Simulate Policy Impact</button>
+      </div>
+    </div>
+    <div class="card" id="resultCard" style="display:none;">
+      <div class="card-body">
+        <h4 class="card-title">Simulation Results</h4>
+        <p id="mortalityChange"></p>
+        <p id="coverageChange"></p>
+        <div class="chart-container">
+          <canvas id="resultsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function simulatePolicy() {
+      const resultCard = document.getElementById('resultCard');
+      const mortalityText = document.getElementById('mortalityChange');
+      const coverageText = document.getElementById('coverageChange');
+
+      resultCard.style.display = 'block';
+      mortalityText.textContent = 'Maternal Mortality Change: -23%';
+      coverageText.textContent = 'Service Coverage Change: +14%';
+
+      const data = {
+        labels: ['Current', 'After Policy'],
+        datasets: [
+          {
+            label: 'Mortality Rate',
+            data: [75, 58],
+            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+          },
+          {
+            label: 'Coverage (%)',
+            data: [48, 62],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+          }
+        ]
+      };
+
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Policy Impact Simulation' }
+          }
+        }
+      };
+
+      const ctx = document.getElementById('resultsChart').getContext('2d');
+      if (window.myChart) { window.myChart.destroy(); }
+      window.myChart = new Chart(ctx, config);
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
