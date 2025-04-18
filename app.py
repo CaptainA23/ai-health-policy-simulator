@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)  # Allow cross-origin requests
 
 @app.route('/simulate', methods=['POST'])
 def simulate():
@@ -7,7 +10,6 @@ def simulate():
     region = data.get('region')
     policy = data.get('policy')
 
-    # Simulated logic
     response = {
         "mortality_rate": 75,
         "service_coverage": 48
