@@ -51,9 +51,9 @@
   const region = document.getElementById('region').value;
   const policy = document.getElementById('policy').value;
 
-  fetch('/simulate', {
+  fetch('https://ai-health-policy-simulator.onrender.com/simulate', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ region, policy })
   })
   .then(response => response.json())
@@ -93,6 +93,7 @@
     window.myChart = new Chart(ctx, config);
   });
 }
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
